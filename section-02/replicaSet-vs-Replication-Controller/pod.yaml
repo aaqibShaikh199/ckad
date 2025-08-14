@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-manual-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: nginx
+    image: aaqibshaikh199/conditional-statement:production
+    ports:
+    - containerPort: 80
