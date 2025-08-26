@@ -1,0 +1,55 @@
+#BLUE
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: blue
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:v1
+
+
+#GREEN
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-green
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      version: green
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: green
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:v2
+
+#SERVICE
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  selector:
+    app: myapp
+    version: blue   # pehle blue ko point karega
+  ports:
+    - port: 80
+      targetPort: 8080
