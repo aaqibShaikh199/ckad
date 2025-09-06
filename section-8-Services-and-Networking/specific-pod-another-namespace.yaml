@@ -1,0 +1,24 @@
+#My pod is in namespace A, and I only want pods with the label env=prod from namespace B to access it.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-aaqib-prod-pods
+  namespace: webhook   # 👈 yaha policy apply hogi (target namespace)
+spec:
+  podSelector:
+    matchLabels:
+      app: api   # 👈 webhook namespace ke api pods par policy lagegi
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: aaqib        # 👈 sirf aaqib namespace
+          podSelector:
+            matchLabels:
+              env: prod          # 👈 us namespace ke sirf env=prod wale pods
+      ports:
+        - protocol: TCP
+          port: 8080
+
