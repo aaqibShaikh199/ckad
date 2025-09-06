@@ -1,0 +1,70 @@
+#DEPLOYMENT-ONE
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: one
+  labels:
+    app: nginx-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-1
+  template:
+    metadata:
+      labels:
+        app: nginx-1
+    spec:
+      containers:
+      - name: nginx
+        image: aaqibshaikh199/network-policy:latest
+        ports:
+        - containerPort: 80
+
+
+#DEPLOYMENT-TWO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: two
+  labels:
+    app: nginx-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-2
+  template:
+    metadata:
+      labels:
+        app: nginx-2
+    spec:
+      containers:
+      - name: nginx
+        image: aaqibshaikh199/network-policy:latest
+        ports:
+        - containerPort: 80
+
+
+#DEPLOYMENT-THREE
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: three
+  labels:
+    app: nginx-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-3
+  template:
+    metadata:
+      labels:
+        app: nginx-3
+    spec:
+      containers:
+      - name: nginx
+        image: aaqibshaikh199/network-policy:latest
+        ports:
+        - containerPort: 80
